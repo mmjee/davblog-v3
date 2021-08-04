@@ -1,0 +1,9 @@
+$font-family: 'IBM Plex Mono';
+
+.v-application {
+  [class*='text-'] {
+    color: #36405a;
+    font-family: $font-family, monospace !important;
+  }
+  font-family: $font-family, monospace !important;
+}

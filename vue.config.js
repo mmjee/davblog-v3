@@ -3,5 +3,13 @@ module.exports = {
 
   transpileDependencies: [
     'vuetify'
-  ]
+  ],
+  productionSourceMap: false,
+  devServer: {
+    proxy: {
+      '/dav': {
+        target: 'http://localhost:5001/'
+      }
+    }
+  }
 }
