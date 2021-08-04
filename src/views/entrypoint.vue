@@ -1,5 +1,6 @@
 <template>
   <v-progress-linear indeterminate height="1vh" v-if="requestInProgress" />
+  <FourZeroFour v-else-if="error === 404" />
   <FileViewer :data="data" :attr="attr" v-else-if="dataType === 'FILE'" />
   <DirectoryViewer :data="data" :attr="attr" v-else-if="dataType === 'DIR'" />
 </template>
@@ -9,10 +10,11 @@ import { DAVUtil } from '@/lib/dav'
 
 import FileViewer from '@/views/file-viewer'
 import DirectoryViewer from '@/views/directory-viewer'
+import FourZeroFour from '@/views/404'
 
 export default {
   name: 'Entrypoint',
-  components: { DirectoryViewer, FileViewer },
+  components: { FourZeroFour, DirectoryViewer, FileViewer },
   data: () => ({
     requestInProgress: false,
     error: null,

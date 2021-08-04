@@ -31,7 +31,8 @@ export default {
     currentlySelectedPage: 1
   }),
   watch: {
-    currentlySelectedPage: 'reloadData'
+    currentlySelectedPage: 'reloadData',
+    data: 'reloadData'
   },
 
   methods: {
