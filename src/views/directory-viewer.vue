@@ -1,7 +1,10 @@
 <template>
   <v-progress-linear height="1vh" indeterminate v-if="loaded === false" />
   <div v-else>
-    <v-card elevation="4" class="pa-4 ma-2" v-for="loadedPage in loadedPages" :key="loadedPage[1].filename">
+    <v-card outlined class="ma-2" v-for="loadedPage in loadedPages" :key="loadedPage[2]">
+      <v-card-title class="text-subtitle-2">
+        <router-link class="text-decoration-underline" :to="loadedPage[2]">{{ loadedPage[2] }}</router-link>
+      </v-card-title>
       <v-card-text>
         <FileViewer :data="loadedPage[0]" :attr="loadedPage[1]" />
       </v-card-text>
@@ -40,7 +43,9 @@ export default {
       this.loadedPages = await Promise.all(pagesToLoad.map(async p => {
         return Promise.all([
           DAVUtil.getFile(p.filename),
-          DAVUtil.statFile(p.filename)
+          DAVUtil.statFile(p.filename),
+          // The usual path, i.e. excepting the .md at the end
+          Promise.resolve(p.filename.slice(0, p.filename.length - 3))
         ])
       }))
       this.loaded = true

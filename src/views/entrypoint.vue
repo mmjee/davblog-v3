@@ -28,6 +28,10 @@ export default {
     this.loadData()
   },
 
+  watch: {
+    $route: 'loadData'
+  },
+
   methods: {
     async getFile (filename) {
       let v
