@@ -1,10 +1,9 @@
 <template>
-  <p>{{ $route }}</p>
+  <v-progress-linear indeterminate v-if="requestInProgress" />
 </template>
 
 <script>
 import { DAVUtil } from '@/lib/dav'
-import marked from 'marked'
 
 export default {
   name: 'Entrypoint',
@@ -23,20 +22,16 @@ export default {
   },
 
   methods: {
-    async getFile (fullFN, isDir) {
+    async getFile (filename) {
       let v
       try {
-        if (isDir) {
-          v = await DAVUtil.getFile(fullFN + 'index.json')
-        } else {
-          v = await DAVUtil.getFile(fullFN)
-        }
+        v = await DAVUtil.getFile(filename)
         return v
       } catch (e) {
         if (e.isAxiosError && e.response.status === 404) {
-          this.errored = 404
+          this.error = 404
         } else {
-          this.errored = true
+          this.error = true
           this.errorMessage = e.message
         }
       }
@@ -55,11 +50,12 @@ export default {
     },
 
     async loadData () {
-      this.errored = false
+      this.error = false
       this.errorMessage = null
-      let isDir = false
 
-      let filenameParts = this.$route.params.pathMatch.split('/').slice(1)
+      // No //s
+      let filenameParts = this.$route.path.split('/').slice(1).filter(x => x !== '')
+
       // handle /
       if (filenameParts.length === 1 && filenameParts[0].length === 0) {
         filenameParts = ['index.md']
@@ -67,22 +63,19 @@ export default {
       } else if (filenameParts[filenameParts.length - 1].length !== 0) {
         filenameParts[filenameParts.length - 1] += '.md'
       } else {
-        isDir = true
+        filenameParts.push('index.json')
       }
 
       const fullFN = filenameParts.join('/')
 
-      const v = await Promise.all([
-        this.getFile(fullFN, isDir),
+      const [data, attr] = await Promise.all([
+        this.getFile(fullFN),
         this.getAttrs(fullFN)
       ])
 
-      const pathname = this.$route.params.pathMatch
-
-      document.title = 'DAVBlog: ' + (pathname === '/' ? 'Index' : pathname)
-      this.loading = false
-      this.data = v[0] && !isDir ? marked(v[0]) : v[0]
-      this.attr = v[1]
+      this.requestInProgress = false
+      this.data = data
+      this.attr = attr
     }
   }
 }

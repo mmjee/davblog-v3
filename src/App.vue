@@ -1,5 +1,5 @@
 <template>
-  <v-app id="inspire">
+  <v-app>
     <v-app-bar
       app
       color="white"
@@ -26,7 +26,7 @@
       </v-container>
     </v-app-bar>
 
-    <v-main class="grey lighten-3">
+    <v-main class="grey lighten-2">
       <v-container>
         <v-row>
           <v-col cols="2">
