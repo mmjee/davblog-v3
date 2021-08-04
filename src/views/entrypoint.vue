@@ -1,5 +1,5 @@
 <template>
-  <v-progress-linear indeterminate v-if="requestInProgress" />
+  <v-progress-linear indeterminate height="1vh" v-if="requestInProgress" />
 </template>
 
 <script>
@@ -13,6 +13,7 @@ export default {
     errorMessage: '',
 
     // Actual data
+    dataType: '',
     attr: null,
     data: null
   }),
@@ -28,7 +29,7 @@ export default {
         v = await DAVUtil.getFile(filename)
         return v
       } catch (e) {
-        if (e.isAxiosError && e.response.status === 404) {
+        if (e.status === 404) {
           this.error = 404
         } else {
           this.error = true
@@ -50,20 +51,25 @@ export default {
     },
 
     async loadData () {
+      this.requestInProgress = true
       this.error = false
       this.errorMessage = null
 
       // No //s
-      let filenameParts = this.$route.path.split('/').slice(1).filter(x => x !== '')
+      let filenameParts = this.$route.path.split('/').slice(1)
 
-      // handle /
-      if (filenameParts.length === 1 && filenameParts[0].length === 0) {
+      // Special case for / -> renders index.md instead
+      if (filenameParts.length === 1 && filenameParts[0] === '') {
         filenameParts = ['index.md']
-        // normal file, not a directory
+        this.dataType = 'FILE'
+        // Normal file, i.e. filenameParts = ['filename'] or ['directory', 'filename']
       } else if (filenameParts[filenameParts.length - 1].length !== 0) {
         filenameParts[filenameParts.length - 1] += '.md'
+        this.dataType = 'FILE'
       } else {
-        filenameParts.push('index.json')
+        // Replaces the last empty '' (i.e. /dirname/ results in ['dirname', ''] with ['dirname', 'index.json']
+        filenameParts[filenameParts.length - 1] = 'index.json'
+        this.dataType = 'DIR'
       }
 
       const fullFN = filenameParts.join('/')
