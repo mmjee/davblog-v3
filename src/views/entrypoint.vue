@@ -1,15 +1,18 @@
 <template>
   <v-progress-linear indeterminate height="1vh" v-if="requestInProgress" />
   <FileViewer :data="data" :attr="attr" v-else-if="dataType === 'FILE'" />
+  <DirectoryViewer :data="data" :attr="attr" v-else-if="dataType === 'DIR'" />
 </template>
 
 <script>
 import { DAVUtil } from '@/lib/dav'
+
 import FileViewer from '@/views/file-viewer'
+import DirectoryViewer from '@/views/directory-viewer'
 
 export default {
   name: 'Entrypoint',
-  components: { FileViewer },
+  components: { DirectoryViewer, FileViewer },
   data: () => ({
     requestInProgress: false,
     error: null,
