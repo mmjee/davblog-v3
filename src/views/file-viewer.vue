@@ -18,6 +18,25 @@ const dtAPI = new Intl.DateTimeFormat([], {
 export default {
   name: 'FileViewer',
   props: ['data', 'attr'],
+  metaInfo () {
+    return {
+      meta: [
+        {
+          name: 'twitter:description',
+          content: this.computedDescription
+        },
+        {
+          property: 'og:description',
+          content: this.computedDescription
+        },
+        {
+          name: 'description',
+          content: this.computedDescription
+        }
+      ]
+    }
+  },
+
   computed: {
     markedUpResult () {
       return marked(this.data, {
@@ -29,6 +48,11 @@ export default {
       const dt = new Date(this.attr.lastmod)
 
       return dtAPI.format(dt)
+    },
+
+    computedDescription () {
+      const lines = this.data.split('\n').filter(line => line !== '')
+      return lines.slice(0, 2).join('\n')
     }
   }
 }

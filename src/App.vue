@@ -43,7 +43,38 @@
 </template>
 <script>
 import SideNav from '@/vendor/side-nav'
+
+// Change all instances of DAVBlog to something more suitable to you.
 export default {
-  components: { SideNav }
+  components: { SideNav },
+  metaInfo: {
+    titleTemplate: '%s - DAVBlog',
+    meta: [
+      {
+        name: 'twitter:card',
+        content: 'summary'
+      },
+      {
+        name: 'twitter:title',
+        content: '',
+        template: chunk => `${chunk} - DAVBlog`,
+        vmid: 'twitter:title'
+      },
+      {
+        property: 'og:title',
+        content: '',
+        template: chunk => `${chunk} - DAVBlog`,
+        vmid: 'og:title'
+      },
+      {
+        property: 'og:type',
+        content: 'article'
+      },
+      {
+        property: 'og:site_name',
+        content: 'DAVBlog'
+      }
+    ]
+  }
 }
 </script>

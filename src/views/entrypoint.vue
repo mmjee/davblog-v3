@@ -26,6 +26,24 @@ export default {
     data: null
   }),
 
+  metaInfo () {
+    return {
+      title: this.$route.path,
+      meta: [
+        {
+          name: 'twitter:title',
+          content: this.$route.path,
+          vmid: 'twitter:title'
+        },
+        {
+          property: 'og:title',
+          content: this.$route.path,
+          vmid: 'og:title'
+        }
+      ]
+    }
+  },
+
   created () {
     this.loadData()
   },
