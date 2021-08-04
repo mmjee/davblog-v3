@@ -1,12 +1,15 @@
 <template>
   <v-progress-linear indeterminate height="1vh" v-if="requestInProgress" />
+  <FileViewer :data="data" :attr="attr" v-else-if="dataType === 'FILE'" />
 </template>
 
 <script>
 import { DAVUtil } from '@/lib/dav'
+import FileViewer from '@/views/file-viewer'
 
 export default {
   name: 'Entrypoint',
+  components: { FileViewer },
   data: () => ({
     requestInProgress: false,
     error: null,
