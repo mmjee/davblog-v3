@@ -21,6 +21,10 @@ export default {
   data: () => ({
     links: [
       {
+        text: 'Home',
+        url: '/'
+      },
+      {
         text: 'Blog',
         url: '/blog/'
       },
