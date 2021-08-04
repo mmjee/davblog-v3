@@ -13,13 +13,13 @@
     <v-main class="grey lighten-2">
       <v-container>
         <v-row>
-          <v-col cols="2">
+          <v-col md="2" cols="12">
             <v-sheet rounded="lg">
               <SideNav />
             </v-sheet>
           </v-col>
 
-          <v-col>
+          <v-col md="10" cols="12">
             <v-sheet
               min-height="70vh"
               rounded="lg"
