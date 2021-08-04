@@ -6,23 +6,7 @@
       flat
     >
       <v-container class="py-0 fill-height">
-        <v-avatar
-          class="mr-10"
-          color="grey darken-1"
-          size="32"
-        ></v-avatar>
-
-        <v-spacer></v-spacer>
-
-        <v-responsive max-width="260">
-          <v-text-field
-            dense
-            flat
-            hide-details
-            rounded
-            solo-inverted
-          ></v-text-field>
-        </v-responsive>
+        <v-app-bar-title>DAVBlog</v-app-bar-title>
       </v-container>
     </v-app-bar>
 
@@ -58,5 +42,14 @@
         </v-row>
       </v-container>
     </v-main>
+
+    <v-footer padless app>
+      <v-col
+        class="text-center"
+        cols="12"
+      >
+        Powered by DAVBlog (V3), an <a href="https://github.com/mmjee/davblog-v3" target="_blank">open source project</a>
+      </v-col>
+    </v-footer>
   </v-app>
 </template>
