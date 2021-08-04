@@ -15,19 +15,7 @@
         <v-row>
           <v-col cols="2">
             <v-sheet rounded="lg">
-              <v-list color="transparent">
-                <v-list-item
-                  v-for="n in 5"
-                  :key="n"
-                  link
-                >
-                  <v-list-item-content>
-                    <v-list-item-title>
-                      List Item {{ n }}
-                    </v-list-item-title>
-                  </v-list-item-content>
-                </v-list-item>
-              </v-list>
+              <SideNav />
             </v-sheet>
           </v-col>
 
@@ -53,3 +41,9 @@
     </v-footer>
   </v-app>
 </template>
+<script>
+import SideNav from '@/vendor/side-nav'
+export default {
+  components: { SideNav }
+}
+</script>
