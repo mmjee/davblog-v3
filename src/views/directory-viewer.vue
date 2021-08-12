@@ -42,12 +42,13 @@ export default {
       const pagesToLoad = this.orderedData.slice(base, base + 2)
 
       this.loadedPages = await Promise.all(pagesToLoad.map(async p => {
-        return Promise.all([
+        const results = await Promise.all([
           DAVUtil.getFile(p.filename),
-          DAVUtil.statFile(p.filename),
-          // The usual path, i.e. excepting the .md at the end
-          Promise.resolve(p.filename.slice(0, p.filename.length - 3))
+          DAVUtil.statFile(p.filename)
         ])
+        // The usual path, i.e. excepting the .md at the end
+        results.push(p.filename.slice(0, p.filename.length - 3))
+        return results
       }))
       this.loaded = true
     }
