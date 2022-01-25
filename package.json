@@ -10,16 +10,16 @@
   },
   "dependencies": {
     "@fontsource/ibm-plex-mono": "^4.5.1",
-    "@fontsource/material-icons": "^4.5.0",
-    "core-js": "^3.20.1",
+    "@fontsource/material-icons": "^4.5.1",
+    "core-js": "^3.20.3",
     "lodash-es": "^4.17.21",
     "marked": "^3.0.8",
     "sass-loader": "^10",
     "vue": "^2.6.14",
     "vue-meta": "^2.4.0",
     "vue-router": "^3.5.3",
-    "vuetify": "^2.6.1",
-    "webdav": "^4.7.0"
+    "vuetify": "^2.6.2",
+    "webdav": "^4.8.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.15",
@@ -28,13 +28,13 @@
     "@vue/cli-service": "~4.5.15",
     "@vue/eslint-config-standard": "^6.1.0",
     "babel-eslint": "^10.1.0",
-    "eslint": "^8.5.0",
-    "eslint-plugin-import": "^2.25.3",
+    "eslint": "^8.7.0",
+    "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.2.0",
     "eslint-plugin-vue": "^7.20.0",
     "lint-staged": "^11.2.6",
-    "sass": "~1.45.1",
+    "sass": "~1.49.0",
     "vue-cli-plugin-vuetify": "~2.4.5",
     "vue-template-compiler": "^2.6.14",
     "vuetify-loader": "^1.7.3"
