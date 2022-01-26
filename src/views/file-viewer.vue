@@ -18,8 +18,10 @@ const dtAPI = new Intl.DateTimeFormat([], {
 const markedRenderer = {
   link (href, title, text) {
     const a = document.createElement('a')
+    if (title != null) {
+      a.setAttribute('title', title)
+    }
     a.setAttribute('href', href)
-    a.setAttribute('title', title)
     a.setAttribute('rel', 'noreferrer')
     a.innerHTML = text
     return a.outerHTML
