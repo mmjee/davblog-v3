@@ -7,12 +7,28 @@
 </template>
 
 <script>
-import marked from 'marked'
+import { marked } from 'marked'
 
 const dtAPI = new Intl.DateTimeFormat([], {
   dateStyle: 'full',
   timeStyle: 'full',
   hour12: true
+})
+
+const markedRenderer = {
+  link (href, title, text) {
+    const a = document.createElement('a')
+    a.setAttribute('href', href)
+    a.setAttribute('title', title)
+    a.setAttribute('rel', 'noreferrer')
+    a.innerHTML = text
+    return a.outerHTML
+  }
+}
+
+marked.use({
+  breaks: true,
+  renderer: markedRenderer
 })
 
 export default {
@@ -39,9 +55,7 @@ export default {
 
   computed: {
     markedUpResult () {
-      return marked(this.data, {
-        breaks: true
-      })
+      return marked(this.data)
     },
 
     localizedLastMod () {
